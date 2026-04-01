@@ -1,0 +1,15 @@
+[project]
+name = "spectra"
+version = "0.1.0"
+description = "Python bindings for the SPECTRA 16K MicroLED Display Engine"
+requires-python = ">=3.11"
+license = "Apache-2.0"
+authors = [{ name = "Sylvain Technologies", email = "engineering@sylvain.tech" }]
+dependencies = ["numpy>=1.26", "pydantic>=2.0"]
+
+[project.optional-dependencies]
+dev = ["ruff", "mypy", "pytest"]
+
+[build-system]
+requires = ["setuptools>=69.0"]
+build-backend = "setuptools.build_meta"

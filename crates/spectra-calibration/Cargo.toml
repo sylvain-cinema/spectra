@@ -1,0 +1,12 @@
+[package]
+name = "spectra-calibration"
+description = "SPECTRA sweet spot elimination and viewing angle calibration"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+thiserror.workspace = true
+serde.workspace = true
+nalgebra.workspace = true
+tracing.workspace = true

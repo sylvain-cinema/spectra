@@ -1,0 +1,11 @@
+[package]
+name = "spectra-panel"
+description = "SPECTRA MicroLED panel controller — hardware abstraction and tiling"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+thiserror.workspace = true
+serde.workspace = true
+tracing.workspace = true

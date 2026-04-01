@@ -1,0 +1,11 @@
+[package]
+name = "spectra-color"
+description = "SPECTRA color science engine — Rec.2020+ gamut mapping and HDR tone mapping"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+
+[dependencies]
+thiserror.workspace = true
+serde.workspace = true
+nalgebra.workspace = true

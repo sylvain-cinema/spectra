@@ -1,0 +1,15 @@
+[package]
+name = "spectra-core"
+description = "SPECTRA display pipeline orchestrator and framebuffer management"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+authors.workspace = true
+
+[dependencies]
+spectra-color = { path = "../spectra-color" }
+spectra-panel = { path = "../spectra-panel" }
+thiserror.workspace = true
+serde.workspace = true
+tracing.workspace = true
