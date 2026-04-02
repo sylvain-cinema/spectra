@@ -40,13 +40,13 @@ SPECTRA is Sylvain's proprietary display engine — a self-emissive MicroLED sys
 ## Key Specifications
 
 <table>
-<tr><td><strong>Resolution</strong></td><td>16K × 16K (262,144 × 262,144 subpixels)</td></tr>
-<tr><td><strong>Peak Brightness</strong></td><td>10,000+ nits</td></tr>
-<tr><td><strong>Contrast Ratio</strong></td><td>1,000,000 : 1 (true black)</td></tr>
+<tr><td><strong>Resolution</strong></td><td>16K × 16K (268 million pixels)</td></tr>
+<tr><td><strong>Peak Brightness</strong></td><td>12,000 nits (4× brighter than Dolby Vision)</td></tr>
+<tr><td><strong>Contrast Ratio</strong></td><td>∞ : 1 (true black, pixel-level control)</td></tr>
 <tr><td><strong>Viewing Angle</strong></td><td>178° uniform luminance</td></tr>
-<tr><td><strong>Color Gamut</strong></td><td>Rec.2020+ (99.8% coverage)</td></tr>
+<tr><td><strong>Color Gamut</strong></td><td>100% Rec.2020 coverage</td></tr>
 <tr><td><strong>HDR Format</strong></td><td>PQ (SMPTE ST 2084) / HLG</td></tr>
-<tr><td><strong>Refresh Rate</strong></td><td>120 Hz native, 240 Hz interpolated</td></tr>
+<tr><td><strong>Refresh Rate</strong></td><td>240 Hz native</td></tr>
 <tr><td><strong>Pixel Pitch</strong></td><td>Sub-millimeter (venue-dependent)</td></tr>
 <tr><td><strong>Panel Lifetime</strong></td><td>100,000+ hours</td></tr>
 </table>

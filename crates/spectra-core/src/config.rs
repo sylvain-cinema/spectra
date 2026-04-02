@@ -59,6 +59,11 @@ impl DisplayConfig {
         DisplayConfigBuilder::default()
     }
 
+    /// Total pixel count across the display (268M for 16K).
+    pub fn total_pixels(&self) -> u64 {
+        self.resolution.pixel_count()
+    }
+
     /// Returns the required bandwidth in gigabits per second.
     pub fn required_bandwidth_gbps(&self) -> f64 {
         let pixels = self.resolution.pixel_count() as f64;
@@ -73,8 +78,8 @@ impl Default for DisplayConfig {
         Self {
             resolution: Resolution::UHD_16K,
             hdr_mode: HdrMode::PQ,
-            peak_brightness_nits: 10_000.0,
-            refresh_rate_hz: 120,
+            peak_brightness_nits: 12_000.0,
+            refresh_rate_hz: 240,
             color_depth_bits: 12,
             panel_count: 1,
             sentio_integration: true,
@@ -149,7 +154,16 @@ mod tests {
     fn test_bandwidth_calculation() {
         let config = DisplayConfig::default();
         let bw = config.required_bandwidth_gbps();
-        // 16K @ 120Hz @ 12-bit RGB = ~572 Gbps
-        assert!(bw > 500.0);
+        // 16K @ 240Hz @ 12-bit RGB ≈ 1,144 Gbps
+        assert!(bw > 1000.0);
+    }
+
+    #[test]
+    fn test_default_specs_match_website() {
+        let config = DisplayConfig::default();
+        assert_eq!(config.peak_brightness_nits, 12_000.0);
+        assert_eq!(config.refresh_rate_hz, 240);
+        assert_eq!(config.color_depth_bits, 12);
+        assert!(config.sentio_integration);
     }
 }
