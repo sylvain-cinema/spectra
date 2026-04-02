@@ -56,32 +56,74 @@ SPECTRA is Sylvain's proprietary display engine — a self-emissive MicroLED sys
 ## Architecture
 
 ```mermaid
-graph LR
-    A[Content Ingest] --> B[Color Science Engine]
-    B --> C[HDR Tone Mapping]
-    C --> D[Panel Controller]
-    D --> E[MicroLED Array]
-
-    F[Calibration Service] --> B
-    F --> D
-    G[SENTIO Commands] --> B
-    G --> C
-
-    subgraph spectra-core
-        A
-        B
-        C
+flowchart LR
+    subgraph INPUT["🎬 Content Ingest"]
+        direction TB
+        SRC["Source Stream\n4K / 8K / 16K"]
+        DEC["Decoder\nHEVC · AV1 · ProRes"]
+        SRC --> DEC
     end
 
-    subgraph spectra-panel
-        D
-        E
+    subgraph COLOR["🎨 spectra-color"]
+        direction TB
+        GAM["Gamut Mapping\nRec.709 → Rec.2020"]
+        HDR["HDR Tone Mapping\nPQ · ST 2084"]
+        CAL_C["Per-Panel\nColor Calibration"]
+        GAM --> HDR --> CAL_C
     end
 
-    subgraph spectra-calibration
-        F
+    subgraph CORE["⚡ spectra-core"]
+        direction TB
+        FB["16K Framebuffer\n268M pixels · 48-bit RGB"]
+        PIPE["Pipeline Orchestrator\n240 Hz render loop"]
+        FB --> PIPE
     end
+
+    subgraph PANEL["🖥️ spectra-panel"]
+        direction TB
+        TILE["Tiling Engine\nMulti-panel seam compensation"]
+        DRV["MicroLED Drivers\nHardware abstraction"]
+        THERM["Thermal Manager\nReal-time monitoring"]
+        TILE --> DRV
+        TILE --> THERM
+    end
+
+    subgraph CALIB["🔧 spectra-calibration"]
+        direction TB
+        SS["Sweet Spot Eliminator\n178° uniform quality"]
+        UNI["Uniformity Corrector\nBrightness · Color"]
+        ANG["Angle Compensator\nAngular response model"]
+        SS --> UNI --> ANG
+    end
+
+    subgraph OUTPUT["✨ Display Output"]
+        LED["MicroLED Array\n12,000 nits · ∞:1 contrast"]
+    end
+
+    subgraph SENTIO_IN["🧠 SENTIO"]
+        CMD["Narrative Commands\nBrightness · Color temp · Emphasis"]
+    end
+
+    DEC --> GAM
+    CAL_C --> FB
+    PIPE --> TILE
+    DRV --> LED
+    ANG --> CAL_C
+    ANG --> DRV
+    CMD -.->|real-time| HDR
+    CMD -.->|real-time| PIPE
+
+    style INPUT fill:#1a1a2e,stroke:#f59e0b,color:#fff
+    style COLOR fill:#1a1a2e,stroke:#f59e0b,color:#fff
+    style CORE fill:#1a1a2e,stroke:#f97316,color:#fff
+    style PANEL fill:#1a1a2e,stroke:#ea580c,color:#fff
+    style CALIB fill:#1a1a2e,stroke:#fcd34d,color:#fff
+    style OUTPUT fill:#0a0a0a,stroke:#f59e0b,color:#fcd34d,stroke-width:3px
+    style SENTIO_IN fill:#1a1a2e,stroke:#a855f7,color:#fff
+    style LED fill:#f59e0b,stroke:#f59e0b,color:#000
 ```
+
+> **Data flow**: Source content enters through the decoder, passes through color science (gamut mapping → HDR → calibration), is rendered into the 16K framebuffer at 240 Hz, distributed across the tiled MicroLED array, with SENTIO providing real-time narrative adjustments throughout the pipeline.
 
 <br/>
 
@@ -117,7 +159,7 @@ let config = DisplayConfig::builder()
     .resolution(Resolution::UHD_16K)
     .color_space(ColorSpace::Rec2020)
     .hdr_mode(HdrMode::PQ)
-    .peak_brightness(10_000.0)
+    .peak_brightness(12_000.0)
     .build();
 
 let pipeline = DisplayPipeline::new(config)?;
