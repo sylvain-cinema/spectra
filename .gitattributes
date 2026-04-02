@@ -1,0 +1,12 @@
+* text=auto eol=lf
+*.md text diff=markdown
+*.yml text
+*.yaml text
+*.json text
+*.toml text
+*.png binary
+*.jpg binary
+*.gif binary
+*.pdf binary
+docs/ linguist-documentation
+*.md linguist-documentation
