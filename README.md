@@ -55,75 +55,11 @@ SPECTRA is Sylvain's proprietary display engine — a self-emissive MicroLED sys
 
 ## Architecture
 
-```mermaid
-flowchart LR
-    subgraph INPUT["🎬 Content Ingest"]
-        direction TB
-        SRC["Source Stream\n4K / 8K / 16K"]
-        DEC["Decoder\nHEVC · AV1 · ProRes"]
-        SRC --> DEC
-    end
+<div align="center">
 
-    subgraph COLOR["🎨 spectra-color"]
-        direction TB
-        GAM["Gamut Mapping\nRec.709 → Rec.2020"]
-        HDR["HDR Tone Mapping\nPQ · ST 2084"]
-        CAL_C["Per-Panel\nColor Calibration"]
-        GAM --> HDR --> CAL_C
-    end
+<img src="./docs/diagrams/architecture.svg" alt="SPECTRA Display Pipeline Architecture" width="100%"/>
 
-    subgraph CORE["⚡ spectra-core"]
-        direction TB
-        FB["16K Framebuffer\n268M pixels · 48-bit RGB"]
-        PIPE["Pipeline Orchestrator\n240 Hz render loop"]
-        FB --> PIPE
-    end
-
-    subgraph PANEL["🖥️ spectra-panel"]
-        direction TB
-        TILE["Tiling Engine\nMulti-panel seam compensation"]
-        DRV["MicroLED Drivers\nHardware abstraction"]
-        THERM["Thermal Manager\nReal-time monitoring"]
-        TILE --> DRV
-        TILE --> THERM
-    end
-
-    subgraph CALIB["🔧 spectra-calibration"]
-        direction TB
-        SS["Sweet Spot Eliminator\n178° uniform quality"]
-        UNI["Uniformity Corrector\nBrightness · Color"]
-        ANG["Angle Compensator\nAngular response model"]
-        SS --> UNI --> ANG
-    end
-
-    subgraph OUTPUT["✨ Display Output"]
-        LED["MicroLED Array\n12,000 nits · ∞:1 contrast"]
-    end
-
-    subgraph SENTIO_IN["🧠 SENTIO"]
-        CMD["Narrative Commands\nBrightness · Color temp · Emphasis"]
-    end
-
-    DEC --> GAM
-    CAL_C --> FB
-    PIPE --> TILE
-    DRV --> LED
-    ANG --> CAL_C
-    ANG --> DRV
-    CMD -.->|real-time| HDR
-    CMD -.->|real-time| PIPE
-
-    style INPUT fill:#1a1a2e,stroke:#f59e0b,color:#fff
-    style COLOR fill:#1a1a2e,stroke:#f59e0b,color:#fff
-    style CORE fill:#1a1a2e,stroke:#f97316,color:#fff
-    style PANEL fill:#1a1a2e,stroke:#ea580c,color:#fff
-    style CALIB fill:#1a1a2e,stroke:#fcd34d,color:#fff
-    style OUTPUT fill:#0a0a0a,stroke:#f59e0b,color:#fcd34d,stroke-width:3px
-    style SENTIO_IN fill:#1a1a2e,stroke:#a855f7,color:#fff
-    style LED fill:#f59e0b,stroke:#f59e0b,color:#000
-```
-
-> **Data flow**: Source content enters through the decoder, passes through color science (gamut mapping → HDR → calibration), is rendered into the 16K framebuffer at 240 Hz, distributed across the tiled MicroLED array, with SENTIO providing real-time narrative adjustments throughout the pipeline.
+</div>
 
 <br/>
 
@@ -170,18 +106,18 @@ pipeline.start()?;
 
 ## Sylvain Ecosystem
 
-<table>
-<tr><td>🟡</td><td><strong>spectra</strong></td><td>16K MicroLED Display Engine</td><td><em>← you are here</em></td></tr>
-<tr><td>🔵</td><td><a href="https://github.com/sylvain-cinema/sonora"><strong>sonora</strong></a></td><td>Wave Field Synthesis Audio Engine</td><td></td></tr>
-<tr><td>🟣</td><td><a href="https://github.com/sylvain-cinema/sentio"><strong>sentio</strong></a></td><td>Empathic AI Narrative Intelligence</td><td></td></tr>
-<tr><td>⚪</td><td><a href="https://github.com/sylvain-cinema/stratum"><strong>stratum</strong></a></td><td>Volumetric Display System</td><td></td></tr>
-<tr><td>🟠</td><td><a href="https://github.com/sylvain-cinema/sylvain-sdk"><strong>sylvain-sdk</strong></a></td><td>Unified Developer SDK</td><td></td></tr>
-<tr><td>🔴</td><td><a href="https://github.com/sylvain-cinema/sylvain-core"><strong>sylvain-core</strong></a></td><td>Platform Core Services</td><td></td></tr>
-<tr><td>🟢</td><td><a href="https://github.com/sylvain-cinema/sylvain-cloud"><strong>sylvain-cloud</strong></a></td><td>Cloud Infrastructure</td><td></td></tr>
-<tr><td>🔶</td><td><a href="https://github.com/sylvain-cinema/content-pipeline"><strong>content-pipeline</strong></a></td><td>Content Mastering Pipeline</td><td></td></tr>
-<tr><td>📊</td><td><a href="https://github.com/sylvain-cinema/research"><strong>research</strong></a></td><td>Technical Papers &amp; Specs</td><td></td></tr>
-<tr><td>📖</td><td><a href="https://github.com/sylvain-cinema/sylvain.github.io"><strong>docs</strong></a></td><td>Developer Documentation</td><td></td></tr>
-</table>
+| Repository | Description | |
+|:-----------|:------------|:--|
+| **spectra** | 16K MicroLED Display Engine | *this repo* |
+| [**sonora**](https://github.com/sylvain-cinema/sonora) | Wave Field Synthesis Audio Engine | |
+| [**sentio**](https://github.com/sylvain-cinema/sentio) | Empathic AI Narrative Intelligence | |
+| [**stratum**](https://github.com/sylvain-cinema/stratum) | Volumetric Display System | |
+| [**sylvain-sdk**](https://github.com/sylvain-cinema/sylvain-sdk) | Unified Developer SDK | |
+| [**sylvain-core**](https://github.com/sylvain-cinema/sylvain-core) | Platform Core Services | |
+| [**sylvain-cloud**](https://github.com/sylvain-cinema/sylvain-cloud) | Cloud Infrastructure | |
+| [**content-pipeline**](https://github.com/sylvain-cinema/content-pipeline) | Content Mastering Pipeline | |
+| [**research**](https://github.com/sylvain-cinema/research) | Technical Papers & Specs | |
+| [**docs**](https://github.com/sylvain-cinema/sylvain.github.io) | Developer Documentation | |
 
 <br/>
 

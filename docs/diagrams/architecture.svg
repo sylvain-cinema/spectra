@@ -1,0 +1,128 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1100 520" fill="none">
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', system-ui, sans-serif; }
+      .title { font-size: 13px; font-weight: 600; fill: #e5e7eb; letter-spacing: 0.05em; }
+      .label { font-size: 11px; font-weight: 500; fill: #d1d5db; }
+      .sublabel { font-size: 9.5px; fill: #9ca3af; }
+      .spec { font-size: 9px; fill: #6b7280; font-family: 'SF Mono', 'Fira Code', monospace; }
+      .arrow { stroke: #4b5563; stroke-width: 1.5; fill: none; marker-end: url(#arrowhead); }
+      .dash { stroke: #7c3aed; stroke-width: 1.2; fill: none; stroke-dasharray: 6 3; marker-end: url(#arrowhead-purple); }
+    </style>
+    <marker id="arrowhead" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#4b5563"/>
+    </marker>
+    <marker id="arrowhead-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#7c3aed"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect width="1100" height="520" rx="12" fill="#0d1117"/>
+  <rect width="1100" height="520" rx="12" fill="none" stroke="#21262d" stroke-width="1"/>
+
+  <!-- Header -->
+  <text x="550" y="36" text-anchor="middle" class="title" fill="#f59e0b" style="font-size:15px; letter-spacing:0.15em;">SPECTRA DISPLAY PIPELINE</text>
+  <text x="550" y="52" text-anchor="middle" class="spec">Content Ingest → Color Science → 16K Framebuffer → MicroLED Output</text>
+
+  <!-- Stage 1: Content Ingest -->
+  <rect x="30" y="80" width="180" height="120" rx="8" fill="#161b22" stroke="#30363d"/>
+  <text x="120" y="100" text-anchor="middle" class="title">CONTENT INGEST</text>
+  <line x1="50" y1="110" x2="190" y2="110" stroke="#30363d" stroke-width="0.5"/>
+  <text x="120" y="130" text-anchor="middle" class="label">Source Decoder</text>
+  <text x="120" y="148" text-anchor="middle" class="sublabel">HEVC · AV1 · ProRes</text>
+  <text x="120" y="168" text-anchor="middle" class="sublabel">4K / 8K / 16K input</text>
+  <text x="120" y="188" text-anchor="middle" class="spec">spectra-core</text>
+
+  <!-- Arrow 1→2 -->
+  <path d="M 210 140 L 260 140" class="arrow"/>
+
+  <!-- Stage 2: Color Science -->
+  <rect x="260" y="80" width="200" height="120" rx="8" fill="#161b22" stroke="#f59e0b" stroke-width="1.5"/>
+  <text x="360" y="100" text-anchor="middle" class="title" fill="#f59e0b">COLOR SCIENCE</text>
+  <line x1="280" y1="110" x2="440" y2="110" stroke="#30363d" stroke-width="0.5"/>
+  <text x="360" y="130" text-anchor="middle" class="label">Gamut Mapping</text>
+  <text x="360" y="148" text-anchor="middle" class="sublabel">Rec.709 → Rec.2020 (100%)</text>
+  <text x="360" y="168" text-anchor="middle" class="label">HDR Tone Mapping</text>
+  <text x="360" y="186" text-anchor="middle" class="sublabel">PQ (ST 2084) · 12,000 nits</text>
+  <text x="360" y="196" text-anchor="middle" class="spec">spectra-color</text>
+
+  <!-- Arrow 2→3 -->
+  <path d="M 460 140 L 510 140" class="arrow"/>
+
+  <!-- Stage 3: Framebuffer -->
+  <rect x="510" y="80" width="200" height="120" rx="8" fill="#161b22" stroke="#f97316" stroke-width="1.5"/>
+  <text x="610" y="100" text-anchor="middle" class="title" fill="#f97316">16K FRAMEBUFFER</text>
+  <line x1="530" y1="110" x2="690" y2="110" stroke="#30363d" stroke-width="0.5"/>
+  <text x="610" y="130" text-anchor="middle" class="label">268M Pixels</text>
+  <text x="610" y="148" text-anchor="middle" class="sublabel">15360 × 8640 · 48-bit RGB</text>
+  <text x="610" y="168" text-anchor="middle" class="label">Pipeline Orchestrator</text>
+  <text x="610" y="186" text-anchor="middle" class="sublabel">240 Hz render loop</text>
+  <text x="610" y="196" text-anchor="middle" class="spec">spectra-core</text>
+
+  <!-- Arrow 3→4 -->
+  <path d="M 710 140 L 760 140" class="arrow"/>
+
+  <!-- Stage 4: Panel Output -->
+  <rect x="760" y="80" width="200" height="120" rx="8" fill="#161b22" stroke="#ea580c" stroke-width="1.5"/>
+  <text x="860" y="100" text-anchor="middle" class="title" fill="#ea580c">PANEL OUTPUT</text>
+  <line x1="780" y1="110" x2="940" y2="110" stroke="#30363d" stroke-width="0.5"/>
+  <text x="860" y="130" text-anchor="middle" class="label">Tiling Engine</text>
+  <text x="860" y="148" text-anchor="middle" class="sublabel">Multi-panel seam compensation</text>
+  <text x="860" y="168" text-anchor="middle" class="label">MicroLED Drivers</text>
+  <text x="860" y="186" text-anchor="middle" class="sublabel">Hardware abstraction layer</text>
+  <text x="860" y="196" text-anchor="middle" class="spec">spectra-panel</text>
+
+  <!-- Final Output -->
+  <rect x="990" y="105" width="80" height="70" rx="8" fill="#f59e0b" stroke="none"/>
+  <text x="1030" y="135" text-anchor="middle" style="font-size:11px; font-weight:700; fill:#000;">MicroLED</text>
+  <text x="1030" y="152" text-anchor="middle" style="font-size:9px; fill:#451a03;">12,000 nits</text>
+  <text x="1030" y="165" text-anchor="middle" style="font-size:9px; fill:#451a03;">∞:1 contrast</text>
+
+  <!-- Arrow 4→Output -->
+  <path d="M 960 140 L 988 140" class="arrow"/>
+
+  <!-- Calibration Module (bottom) -->
+  <rect x="260" y="260" width="270" height="110" rx="8" fill="#161b22" stroke="#fcd34d" stroke-width="1"/>
+  <text x="395" y="282" text-anchor="middle" class="title" fill="#fcd34d">CALIBRATION</text>
+  <line x1="280" y1="292" x2="510" y2="292" stroke="#30363d" stroke-width="0.5"/>
+  <text x="330" y="312" text-anchor="middle" class="label">Sweet Spot</text>
+  <text x="330" y="328" text-anchor="middle" class="sublabel">Eliminator</text>
+  <text x="330" y="344" text-anchor="middle" class="sublabel">178° uniformity</text>
+  <text x="460" y="312" text-anchor="middle" class="label">Brightness</text>
+  <text x="460" y="328" text-anchor="middle" class="sublabel">Uniformity Corrector</text>
+  <text x="460" y="344" text-anchor="middle" class="sublabel">Angle compensation</text>
+  <text x="395" y="364" text-anchor="middle" class="spec">spectra-calibration</text>
+
+  <!-- Calibration arrows up -->
+  <path d="M 350 260 L 350 200" class="arrow"/>
+  <path d="M 460 260 L 860 200" class="arrow"/>
+
+  <!-- SENTIO Module (bottom right) -->
+  <rect x="620" y="300" width="200" height="80" rx="8" fill="#161b22" stroke="#a855f7" stroke-width="1"/>
+  <text x="720" y="322" text-anchor="middle" class="title" fill="#a855f7">SENTIO</text>
+  <line x1="640" y1="332" x2="800" y2="332" stroke="#30363d" stroke-width="0.5"/>
+  <text x="720" y="350" text-anchor="middle" class="label">Narrative Commands</text>
+  <text x="720" y="366" text-anchor="middle" class="sublabel">Brightness · Color temp · Emphasis</text>
+
+  <!-- SENTIO dashed arrows -->
+  <path d="M 680 300 L 400 200" class="dash"/>
+  <path d="M 750 300 L 640 200" class="dash"/>
+
+  <!-- Legend -->
+  <rect x="30" y="440" width="1040" height="60" rx="6" fill="#0d1117" stroke="#21262d"/>
+  <line x1="50" y1="470" x2="80" y2="470" class="arrow"/>
+  <text x="90" y="474" class="spec">Data flow</text>
+  <line x1="170" y1="470" x2="200" y2="470" class="dash"/>
+  <text x="210" y="474" class="spec">Real-time narrative control (SENTIO)</text>
+  <rect x="380" y="462" width="12" height="12" rx="2" fill="none" stroke="#f59e0b"/>
+  <text x="400" y="474" class="spec">spectra-color</text>
+  <rect x="490" y="462" width="12" height="12" rx="2" fill="none" stroke="#f97316"/>
+  <text x="510" y="474" class="spec">spectra-core</text>
+  <rect x="600" y="462" width="12" height="12" rx="2" fill="none" stroke="#ea580c"/>
+  <text x="620" y="474" class="spec">spectra-panel</text>
+  <rect x="710" y="462" width="12" height="12" rx="2" fill="none" stroke="#fcd34d"/>
+  <text x="730" y="474" class="spec">spectra-calibration</text>
+  <rect x="850" y="462" width="12" height="12" rx="2" fill="none" stroke="#a855f7"/>
+  <text x="870" y="474" class="spec">sentio (external)</text>
+</svg>
