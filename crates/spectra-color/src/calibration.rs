@@ -45,12 +45,12 @@ pub struct DisplayCalibrationProfile {
 }
 
 impl DisplayCalibrationProfile {
-    /// Create a default profile targeting D65 white point at 10,000 nits.
+    /// Create a default profile targeting D65 white point at 12,000 nits.
     pub fn default_cinema() -> Self {
         Self {
             panels: Vec::new(),
             target_white_point: (0.3127, 0.3290), // D65
-            target_peak_nits: 10_000.0,
+            target_peak_nits: 12_000.0,
         }
     }
 }
