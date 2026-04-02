@@ -1,42 +1,57 @@
-<![CDATA[<div align="center">
+<div align="center">
 
-```
-███████╗██████╗ ███████╗ ██████╗████████╗██████╗  █████╗
-██╔════╝██╔══██╗██╔════╝██╔════╝╚══██╔══╝██╔══██╗██╔══██╗
-███████╗██████╔╝█████╗  ██║        ██║   ██████╔╝███████║
-╚════██║██╔═══╝ ██╔══╝  ██║        ██║   ██╔══██╗██╔══██║
-███████║██║     ███████╗╚██████╗   ██║   ██║  ██║██║  ██║
-╚══════╝╚═╝     ╚══════╝ ╚═════╝   ╚═╝   ╚═╝  ╚═╝╚═╝  ╚═╝
-```
+<img src="https://img.shields.io/badge/SYLVAIN-SPECTRA-000000?style=for-the-badge&labelColor=f59e0b&color=000000" alt="SPECTRA" height="40"/>
 
-**The Living Canvas — 16K MicroLED Display Engine**
+### The Living Canvas
 
-[![CI](https://github.com/sylvain-cinema/spectra/actions/workflows/ci.yml/badge.svg)](https://github.com/sylvain-cinema/spectra/actions)
-[![License](https://img.shields.io/badge/License-Apache%202.0-gold.svg)](LICENSE)
-[![Docs](https://img.shields.io/badge/docs-sylvain.github.io-amber.svg)](https://sylvain-cinema.github.io)
+**16K MicroLED Display Engine**
 
-*A morphable 16K MicroLED self-emissive display system that eliminates the cinema sweet spot problem.*
+<br/>
+
+[![CI](https://github.com/sylvain-cinema/spectra/actions/workflows/ci.yml/badge.svg)](https://github.com/sylvain-cinema/spectra/actions/workflows/ci.yml)
+[![License](https://img.shields.io/badge/license-Apache%202.0-f59e0b?style=flat-square)](LICENSE)
+[![Rust](https://img.shields.io/badge/rust-2024-dea584?style=flat-square&logo=rust&logoColor=white)](https://www.rust-lang.org)
+[![Python](https://img.shields.io/badge/python-3.11+-3776AB?style=flat-square&logo=python&logoColor=white)](https://python.org)
+[![Docs](https://img.shields.io/badge/docs-sylvain.github.io-f97316?style=flat-square)](https://sylvain-cinema.github.io)
+
+<br/>
+
+*A morphable 16K self-emissive MicroLED display that eliminates the cinema sweet spot problem.*
+*Consistent brightness and color fidelity across a near-180° viewing cone.*
+
+<br/>
+
+**Every Seat is the Best Seat.**
 
 </div>
 
+<br/>
+
 ---
+
+<br/>
 
 ## Overview
 
-SPECTRA is Sylvain's proprietary display engine — a self-emissive MicroLED system delivering consistent brightness and color fidelity across a near-180° viewing cone. Unlike projection-based systems (IMAX, Dolby Cinema) where only 15-20% of seats offer optimal viewing, SPECTRA ensures **every seat is the best seat**.
+SPECTRA is Sylvain's proprietary display engine — a self-emissive MicroLED system that fundamentally solves the viewing angle problem plaguing cinema for over a century. Unlike projection-based systems (IMAX, Dolby Cinema) where only 15–20% of seats offer optimal viewing, SPECTRA delivers reference-quality imagery to **every seat in the auditorium**.
 
-### Key Specifications
+<br/>
 
-| Parameter | Value |
-|-----------|-------|
-| Resolution | 16K × 16K (262,144 × 262,144 subpixels) |
-| Peak Brightness | 10,000+ nits |
-| Contrast Ratio | 1,000,000:1 (true black) |
-| Viewing Angle | 178° (uniform luminance) |
-| Color Gamut | Rec.2020+ (99.8% coverage) |
-| Refresh Rate | 120Hz native, 240Hz interpolated |
-| Pixel Pitch | Sub-millimeter (venue-dependent) |
-| Panel Lifetime | 100,000+ hours |
+## Key Specifications
+
+<table>
+<tr><td><strong>Resolution</strong></td><td>16K × 16K (262,144 × 262,144 subpixels)</td></tr>
+<tr><td><strong>Peak Brightness</strong></td><td>10,000+ nits</td></tr>
+<tr><td><strong>Contrast Ratio</strong></td><td>1,000,000 : 1 (true black)</td></tr>
+<tr><td><strong>Viewing Angle</strong></td><td>178° uniform luminance</td></tr>
+<tr><td><strong>Color Gamut</strong></td><td>Rec.2020+ (99.8% coverage)</td></tr>
+<tr><td><strong>HDR Format</strong></td><td>PQ (SMPTE ST 2084) / HLG</td></tr>
+<tr><td><strong>Refresh Rate</strong></td><td>120 Hz native, 240 Hz interpolated</td></tr>
+<tr><td><strong>Pixel Pitch</strong></td><td>Sub-millimeter (venue-dependent)</td></tr>
+<tr><td><strong>Panel Lifetime</strong></td><td>100,000+ hours</td></tr>
+</table>
+
+<br/>
 
 ## Architecture
 
@@ -49,7 +64,6 @@ graph LR
 
     F[Calibration Service] --> B
     F --> D
-
     G[SENTIO Commands] --> B
     G --> C
 
@@ -69,16 +83,20 @@ graph LR
     end
 ```
 
-## Modules
+<br/>
+
+## Workspace Crates
 
 | Crate | Description |
-|-------|-------------|
-| `spectra-core` | Rendering pipeline orchestrator and 16K framebuffer management |
-| `spectra-color` | Rec.2020+ color gamut mapping, HDR PQ/HLG tone mapping |
-| `spectra-panel` | MicroLED hardware abstraction, multi-panel tiling, thermal management |
-| `spectra-calibration` | Sweet spot elimination, brightness uniformity, viewing angle compensation |
+|:------|:------------|
+| **`spectra-core`** | Rendering pipeline orchestrator · 16K framebuffer management |
+| **`spectra-color`** | Rec.2020+ color gamut mapping · PQ/HLG HDR tone mapping · Per-panel calibration |
+| **`spectra-panel`** | MicroLED hardware abstraction · Multi-panel tiling engine · Thermal management |
+| **`spectra-calibration`** | Sweet spot elimination algorithms · Brightness uniformity · Viewing angle compensation |
 
-## Building
+<br/>
+
+## Quick Start
 
 ```bash
 # Build all crates
@@ -87,11 +105,9 @@ cargo build --workspace
 # Run tests
 cargo test --workspace
 
-# Build Python bindings
+# Python bindings
 cd python && pip install -e .
 ```
-
-## Quick Start
 
 ```rust
 use spectra_core::{DisplayPipeline, DisplayConfig, Resolution};
@@ -108,35 +124,38 @@ let pipeline = DisplayPipeline::new(config)?;
 pipeline.start()?;
 ```
 
+<br/>
+
 ## Sylvain Ecosystem
 
-SPECTRA is part of the Sylvain cinema technology platform:
+<table>
+<tr><td>🟡</td><td><strong>spectra</strong></td><td>16K MicroLED Display Engine</td><td><em>← you are here</em></td></tr>
+<tr><td>🔵</td><td><a href="https://github.com/sylvain-cinema/sonora"><strong>sonora</strong></a></td><td>Wave Field Synthesis Audio Engine</td><td></td></tr>
+<tr><td>🟣</td><td><a href="https://github.com/sylvain-cinema/sentio"><strong>sentio</strong></a></td><td>Empathic AI Narrative Intelligence</td><td></td></tr>
+<tr><td>⚪</td><td><a href="https://github.com/sylvain-cinema/stratum"><strong>stratum</strong></a></td><td>Volumetric Display System</td><td></td></tr>
+<tr><td>🟠</td><td><a href="https://github.com/sylvain-cinema/sylvain-sdk"><strong>sylvain-sdk</strong></a></td><td>Unified Developer SDK</td><td></td></tr>
+<tr><td>🔴</td><td><a href="https://github.com/sylvain-cinema/sylvain-core"><strong>sylvain-core</strong></a></td><td>Platform Core Services</td><td></td></tr>
+<tr><td>🟢</td><td><a href="https://github.com/sylvain-cinema/sylvain-cloud"><strong>sylvain-cloud</strong></a></td><td>Cloud Infrastructure</td><td></td></tr>
+<tr><td>🔶</td><td><a href="https://github.com/sylvain-cinema/content-pipeline"><strong>content-pipeline</strong></a></td><td>Content Mastering Pipeline</td><td></td></tr>
+<tr><td>📊</td><td><a href="https://github.com/sylvain-cinema/research"><strong>research</strong></a></td><td>Technical Papers &amp; Specs</td><td></td></tr>
+<tr><td>📖</td><td><a href="https://github.com/sylvain-cinema/sylvain.github.io"><strong>docs</strong></a></td><td>Developer Documentation</td><td></td></tr>
+</table>
 
-| Repository | Description |
-|-----------|-------------|
-| **spectra** (this repo) | 16K MicroLED Display Engine |
-| [sonora](https://github.com/sylvain-cinema/sonora) | Wave Field Synthesis Audio Engine |
-| [sentio](https://github.com/sylvain-cinema/sentio) | Empathic AI Narrative Intelligence |
-| [stratum](https://github.com/sylvain-cinema/stratum) | Volumetric Display System |
-| [sylvain-sdk](https://github.com/sylvain-cinema/sylvain-sdk) | Unified Developer SDK |
-| [sylvain-core](https://github.com/sylvain-cinema/sylvain-core) | Platform Core Services |
-| [sylvain-cloud](https://github.com/sylvain-cinema/sylvain-cloud) | Cloud Infrastructure |
-| [content-pipeline](https://github.com/sylvain-cinema/content-pipeline) | Content Mastering Pipeline |
-| [venue-control](https://github.com/sylvain-cinema/venue-control) | Venue Control System |
-| [research](https://github.com/sylvain-cinema/research) | Technical Papers & Specs |
+<br/>
 
 ## License
 
-Licensed under the Apache License, Version 2.0. See [LICENSE](LICENSE) for details.
+Licensed under the [Apache License, Version 2.0](LICENSE).
 
-## Contributing
-
-See [CONTRIBUTING.md](CONTRIBUTING.md) for guidelines.
+<br/>
 
 ---
 
 <div align="center">
-<strong>SYLVAIN</strong> — The Future of Cinematic Storytelling<br>
+<br/>
+
+<img src="https://img.shields.io/badge/SYLVAIN-The_Future_of_Cinematic_Storytelling-000000?style=for-the-badge&labelColor=f59e0b&color=111111" alt="Sylvain"/>
+
 <sub>Every Seat is the Best Seat</sub>
+
 </div>
-]]>
